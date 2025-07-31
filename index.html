@@ -2,13 +2,27 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
-  <title>亂數產生器</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>簡易抽獎機</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dist/style.css" />
 </head>
 <body>
-  <h1>亂數產生器</h1>
-  <button id="generate-btn">產生亂數</button>
-  <p id="result"></p>
+  <div class="container">
+    <h1>簡易抽獎機</h1>
+  
+    <label>候選名單（一行一人）</label>
+    <textarea id="names"></textarea>
 
-  <script src="dist/generateRandom.js"></script>
+    <label>獎項清單（格式：獎品名稱, 數量）</label>
+    <textarea id="prizes"></textarea>
+
+    <label>得獎名單</label>
+    <div class="result" id="result"></div>
+
+    <button id="draw-btn">開始抽獎</button>
+  </div>
+
+  <script type="module" src="dist/main.js"></script>
 </body>
 </html>
