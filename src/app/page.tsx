@@ -4,6 +4,7 @@ import { useState } from "react";
 import CandidateInput from "@/app/ui/CandidateInput";
 import PrizeInput, { Prize } from "@/app/ui/PrizeInput";
 import DrawButton, { DrawMode, DrawResult } from "@/app/ui/DrawButton";
+import DrawResultViewer from "@/app/ui/DrawResultViewer";
 
 
 export default function Home() {
@@ -30,7 +31,7 @@ export default function Home() {
           <option value="no-repeat">每人僅得獎一次</option>
           <option value="allow-repeat">允許重複得獎</option>
         </select>
-        </div>
+      </div>
 
       <DrawButton
         candidates={candidates}
@@ -38,6 +39,8 @@ export default function Home() {
         drawMode={drawMode}
         onDraw={setResults}
       />
+
+      <DrawResultViewer results={results} />
     </div>
   );
 }
