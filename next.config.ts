@@ -5,3 +5,11 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
+const isProd = process.env.NODE_ENV === "production";
+
+module.exports = {
+  output: "export",
+  basePath: isProd ? "/GithubPageDemo" : "",
+  assetPrefix: isProd ? "/GithubPageDemo/" : "",
+};
