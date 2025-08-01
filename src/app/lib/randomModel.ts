@@ -16,12 +16,10 @@ export function getRandomValue(min: number, max: number) {
   return randomValue;
 }
 
-export function fisherYatesShuffle(min: number, max: number): number[] {
-  const range = max - min + 1;
-  const numbers = Array.from({ length: range }, (_, i) => i + min);
-  for (let i = numbers.length - 1; i > 0; --i) {
-    let j = getRandomValue(min, i);
-    [numbers[i], numbers[j]] = [numbers[j]!, numbers[i]!];
+export function fisherYatesShuffle<T>(arr: T[]): T[] {
+  for (let i = arr.length - 1; i > 0; --i) {
+    let j = getRandomValue(0, i);
+    [arr[i], arr[j]] = [arr[j], arr[i]];
   }
-  return numbers;
+  return arr;
 }
