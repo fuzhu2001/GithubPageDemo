@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build && next export",
-    "start": "next start && gh-pages -d out",
+    "start": "next start",
+    "deploy": "next run build && gh-pages -d out",
     "lint": "next lint"
   },
   "dependencies": {
