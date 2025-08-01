@@ -1,6 +1,4 @@
-import React from "react";
-import { Prize } from "./PrizeInput";
-import { fisherYatesShuffle } from "@/app/lib/randomModel"
+import { Prize } from "@/app/ui/PrizeInput";
 
 export type DrawResult = {
   name: string;
@@ -36,9 +34,9 @@ export default function DrawButton({ candidates, prizes, onDraw }: Props) {
 
     // 抽出結果
     const results: DrawResult[] = prizePool.map((prizeName, i) => ({
-      name: availableCandidates[i],
-      prize: prizeName,
-    }));
+        name: availableCandidates[i],
+        prize: prizeName,
+      }));
 
     onDraw(results);
   };
