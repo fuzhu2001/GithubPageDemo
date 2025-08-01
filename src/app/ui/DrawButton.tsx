@@ -1,4 +1,7 @@
 import { Prize } from "@/app/ui/PrizeInput";
+import { getRandomValue, fisherYatesShuffle } from "@/app/lib/randomModel"
+
+export type DrawMode = "no-repeat" | "allow-repeat";
 
 export type DrawResult = {
   name: string;
@@ -8,10 +11,12 @@ export type DrawResult = {
 type Props = {
   candidates: string[];
   prizes: Prize[];
+  drawMode: DrawMode;
   onDraw: (results: DrawResult[]) => void;
 };
 
-export default function DrawButton({ candidates, prizes, onDraw }: Props) {
+
+export default function DrawButton({ candidates, prizes, drawMode, onDraw }: Props) {
   const handleDraw = () => {
     // 檢查輸入
     const totalPrizes = prizes.reduce((sum, p) => sum + p.count, 0);
@@ -29,15 +34,24 @@ export default function DrawButton({ candidates, prizes, onDraw }: Props) {
       }
     });
 
-    // 隨機打亂候選人與獎品
-    fisherYatesShuffle(availableCandidates);
-
     // 抽出結果
-    const results: DrawResult[] = prizePool.map((prizeName, i) => ({
+    let results: DrawResult[] = [];
+    if (drawMode === "no-repeat") {
+      // 隨機打亂候選人與獎品
+      fisherYatesShuffle(availableCandidates);
+      results = prizePool.map((prizeName, i) => ({
         name: availableCandidates[i],
         prize: prizeName,
       }));
-
+    } else {
+      results = prizePool.map((prizeName) => {
+        const winner = availableCandidates[getRandomValue(0, availableCandidates.length-1)];
+        return {
+          name: winner,
+          prize: prizeName,
+        };
+      });
+    }
     onDraw(results);
   };
 
@@ -47,7 +61,7 @@ export default function DrawButton({ candidates, prizes, onDraw }: Props) {
         onClick={handleDraw}
         className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
       >
-        🎲 抽獎
+        抽獎
       </button>
     </div>
   );
